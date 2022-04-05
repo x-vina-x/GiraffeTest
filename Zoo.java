@@ -16,30 +16,42 @@ could add in history of purchases?
 
 import java.util.Scanner;
 import java.io.*;
+import java.util.Objects;
 
 
 public class Zoo{
+    static int total;
    
     public static int calculation(int count, int price) {
-        int total;
+        
         total = count * price;
         return total;
     }
     public static void main(String[] args) {
+        
 
         System.out.println("Input order, in the input of Flavour Type then the amount. ex: RR 3");
         try (Scanner sc = new Scanner(System.in)) {
-			Flavour rockyRoad = new Flavour("Rocky Road", 8);
 
-            Flavour cookiesCream = new Flavour("Cookies & Cream", 10);
+            Flavour[] typeFlavours = new Flavour[3];
 
-            Flavour netflixChill = new Flavour("Netflix & Chill", 12);
+            typeFlavours[0] = new Flavour("RR", 8);
+			
+            typeFlavours[1] = new Flavour("CC", 10);
+
+            typeFlavours[2] = new Flavour("NC", 12);
+            
     
             String typeInput = sc.next();
             int typeCount = Integer.parseInt(sc.next());
-            int total = calculation(typeCount, rockyRoad.getFlavourPrice());
 
+            for(int i = 0; i<typeFlavours.length; i++){
+                if(Objects.equals(typeInput, typeFlavours[i].getFlavourType())){
+                    calculation(typeCount, typeFlavours[i].getFlavourPrice());
+                }
+            }
             System.out.println("Your total for "+ typeCount+ " " + typeInput+ " is: " + total);
+
             System.exit(0);
 
 		} catch (NumberFormatException e) {
