@@ -20,17 +20,16 @@ import java.util.Objects;
 
 
 public class Zoo{
-    static int total;
+    static double total;
    
-    public static int calculation(int count, int price) {
+    public static double calculation(int count, int price, double discount) {
         
-        total = count * price;
+        total = count * price - discount;
         return total;
     }
     public static void main(String[] args) {
-        
 
-        System.out.println("Input order, in the input of Flavour Type then the amount. ex: RR 3");
+        System.out.println("Input order: ");
         try (Scanner sc = new Scanner(System.in)) {
 
             Flavour[] typeFlavours = new Flavour[3];
@@ -47,7 +46,9 @@ public class Zoo{
 
             for(int i = 0; i<typeFlavours.length; i++){
                 if(Objects.equals(typeInput, typeFlavours[i].getFlavourType())){
-                    calculation(typeCount, typeFlavours[i].getFlavourPrice());
+                    double discount = deal(typeInput, typeCount);
+                    calculation(typeCount, typeFlavours[i].getFlavourPrice(), discount);
+
                 }
             }
             System.out.println("Your total for "+ typeCount+ " " + typeInput+ " is: " + total);
@@ -58,6 +59,16 @@ public class Zoo{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    private static double deal(String typeInput, int typeCount) {
+        double discount = 0;
+        if("RR".equals(typeInput)){
+            discount = (typeCount%2)*8;
+
+        }else if("CC".equals(typeInput)){
+            discount = (typeCount%2)*(10*0.5);
+        }
+        return discount;
     }
     
 }
