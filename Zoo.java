@@ -44,21 +44,20 @@ public class Zoo{
         return discount;
     }
     public static void main(String[] args) {
+        //Setting up the database of available flavours
+        Flavour[] typeFlavours = new Flavour[3];
+
+        typeFlavours[0] = new Flavour("RR", 8);
+        
+        typeFlavours[1] = new Flavour("CC", 10);
+
+        typeFlavours[2] = new Flavour("NC", 12);
 
         System.out.println("Input order: ");
         //Asking format is FlavourType then the amount. Example: RR 5
-        
+
         try (Scanner sc = new Scanner(System.in)) {
-
-            //Setting up the database of available flavours
-            Flavour[] typeFlavours = new Flavour[3];
-
-            typeFlavours[0] = new Flavour("RR", 8);
-			
-            typeFlavours[1] = new Flavour("CC", 10);
-
-            typeFlavours[2] = new Flavour("NC", 12);
-            
+            boolean flag = true;
             //Reading for user input
             String typeInput = sc.next();
             int typeCount = Integer.parseInt(sc.next());
@@ -66,16 +65,21 @@ public class Zoo{
             //Main process in gathering appropriate flavour type, the price, any discount, overall calculation
             for(int i = 0; i<typeFlavours.length; i++){
                 if(Objects.equals(typeInput, typeFlavours[i].getFlavourType())){
+                    flag = false;
                     double discount = deal(typeInput, typeCount);
                     calculation(typeCount, typeFlavours[i].getFlavourPrice(), discount);
+                    System.out.println("Your total for "+ typeCount+ " " + typeInput+ " is: " + total);
                 }
             }
-            System.out.println("Your total for "+ typeCount+ " " + typeInput+ " is: " + total);
+            if(flag){
+                System.out.println("We don't carry that flavour. Please try again.");
+            }
             System.exit(0);
 
 		} catch (NumberFormatException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
+            System.out.println("User input invalid, please try again.");
 		}
     }
 }
