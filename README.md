@@ -22,7 +22,8 @@ Assumptions made:
         - Netflix & Chill is NC (great name for an ice cream btw)
 
 How to run:
-The program is written in java. After compiling the program, the terminal will prompt you for your order. THe order format needs to be in the format of Flavour Type and then the amount. 
+
+The program is written in java. After compiling the program, the terminal will prompt you for your order. The order format needs to be in the format of Flavour Type and then the amount. 
 
 Example: CC 5 is an order for 5 Cookies & Cream, which should return 45, as 4 of the ice creams are at full price (10.00) and one at half priced (5.00).
 
